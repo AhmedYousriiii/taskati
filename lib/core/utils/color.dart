@@ -7,4 +7,5 @@ class GetColor {
   static Color blackcolor = Color(0xff121212);
   static Color greecolor = Color(0xffB4AAAA);
   static Color whitecolor = Color.fromARGB(255, 252, 251, 251);
+  static Color redcolor = Color.fromARGB(255, 233, 34, 34);
 }

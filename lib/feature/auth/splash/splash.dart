@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:taskati/core/services/local_storage.dart';
+import 'package:taskati/feature/home/page/home.dart';
 
 import 'package:taskati/feature/upload/upload_image.dart';
 import 'package:taskati/core/function/Navigator.dart';
@@ -16,9 +18,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(Duration(seconds: 5), () {
-      pushReplace(context, UploadScreen());
+    bool isUpload = AppLocalStorage.getcacheData(AppLocalStorage.isuploadkey) ?? false;
+    Future.delayed(Duration(seconds: 3), () {
+      if (isUpload) {
+        pushReplace(context, HomeScreen());
+      } else {
+        pushReplace(context, UploadScreen());
+      }
     });
   }
 

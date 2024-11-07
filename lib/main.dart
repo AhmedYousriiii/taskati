@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:taskati/core/services/local_storage.dart';
+import 'package:taskati/core/utils/color.dart';
 import 'package:taskati/feature/auth/splash/splash.dart';
-import 'package:taskati/feature/home/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await Hive.openBox("uesr");
+  await Hive.openBox("user");
+  await AppLocalStorage.init();
 
   runApp(const MyApp());
 }
@@ -20,7 +22,34 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      theme: ThemeData(
+          inputDecorationTheme: InputDecorationTheme(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: GetColor.primarycolor,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: GetColor.primarycolor,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: GetColor.redcolor,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: GetColor.redcolor,
+          ),
+        ),
+      )),
+      home: SplashScreen(),
     );
   }
 }

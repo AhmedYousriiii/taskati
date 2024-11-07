@@ -1,14 +1,14 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:taskati/core/function/Navigator.dart';
 import 'package:taskati/core/function/showerrodialog.dart';
+import 'package:taskati/core/services/local_storage.dart';
 import 'package:taskati/core/utils/color.dart';
 import 'package:taskati/core/utils/text_style.dart';
 import 'package:taskati/core/widget/button_custom.dart';
-import 'package:taskati/feature/home/home.dart';
+import 'package:taskati/feature/home/page/home.dart';
 
 class UploadScreen extends StatefulWidget {
   const UploadScreen({super.key});
@@ -18,7 +18,7 @@ class UploadScreen extends StatefulWidget {
 }
 
 class _UploadScreenState extends State<UploadScreen> {
-  String? path;
+  File? imageFile;
   String name = "";
 
   @override
@@ -30,16 +30,16 @@ class _UploadScreenState extends State<UploadScreen> {
         actions: [
           TextButton(
               onPressed: () async {
-                if (path == null && name.isEmpty) {
+                if (imageFile == null && name.isEmpty) {
                   showErroDialog(context: context, massage: "upload your image and name");
-                } else if (path == null && name.isNotEmpty) {
+                } else if (imageFile == null && name.isNotEmpty) {
                   showErroDialog(context: context, massage: "upload your image");
-                } else if (path != null && name.isEmpty) {
+                } else if (imageFile != null && name.isEmpty) {
                   showErroDialog(context: context, massage: "chick your name");
                 } else {
-                  var box = Hive.box("uesr");
-                  await box.put("name", name);
-                  print(box.put("name", name));
+                  AppLocalStorage.cacheData(AppLocalStorage.namekey, name);
+                  AppLocalStorage.cacheData(AppLocalStorage.imagekey, imageFile);
+                  AppLocalStorage.cacheData(AppLocalStorage.isuploadkey, true);
                   pushReplace(context, HomeScreen());
                 }
               },
@@ -57,8 +57,8 @@ class _UploadScreenState extends State<UploadScreen> {
             children: [
               CircleAvatar(
                 radius: 70,
-                foregroundImage: path != null
-                    ? AssetImage(path!)
+                foregroundImage: imageFile != null
+                    ? FileImage(imageFile!)
                     : NetworkImage(
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSeatcmYRYsMNho5mAp9qySUzghxQYU_TPGw&s",
                       ),
@@ -69,7 +69,7 @@ class _UploadScreenState extends State<UploadScreen> {
               ButtonCustom(
                 text: "Upload from Camare",
                 onpress: () async {
-                  await pickimage(iscamare: true);
+                  await pickImage(iscamera: true);
                 },
               ),
               SizedBox(
@@ -78,7 +78,7 @@ class _UploadScreenState extends State<UploadScreen> {
               ButtonCustom(
                 text: "Upload from Gallery",
                 onpress: () async {
-                  await pickimage(iscamare: false);
+                  await pickImage(iscamera: false);
                 },
               ),
               SizedBox(
@@ -127,17 +127,15 @@ class _UploadScreenState extends State<UploadScreen> {
     );
   }
 
-  pickimage({required bool iscamare}) async {
-    await ImagePicker()
-        .pickImage(
-      source: iscamare ? ImageSource.camera : ImageSource.gallery,
-    )
-        .then((value) {
-      if (value != null) {
-        setState(() {
-          path = value.path;
-        });
-      }
-    });
+  Future<void> pickImage({required bool iscamera}) async {
+    final pickedFile = await ImagePicker().pickImage(
+      source: iscamera ? ImageSource.camera : ImageSource.gallery,
+    );
+
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
   }
 }

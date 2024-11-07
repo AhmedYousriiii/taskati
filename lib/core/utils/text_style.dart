@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskati/core/constant/App_fonts.dart';
+import 'package:taskati/core/utils/color.dart';
 
 TextStyle getTitleTextStyle({double? fontsize, FontWeight? fontWeight, Color? color}) {
   return TextStyle(
@@ -10,11 +11,20 @@ TextStyle getTitleTextStyle({double? fontsize, FontWeight? fontWeight, Color? co
   );
 }
 
+TextStyle getprimaryTextStyle({double? fontsize, FontWeight? fontWeight, Color? color}) {
+  return TextStyle(
+    fontSize: fontsize ?? 18,
+    fontWeight: fontWeight ?? FontWeight.bold,
+    color: color ?? GetColor.primarycolor,
+    fontFamily: AppFonts.poppins,
+  );
+}
+
 TextStyle getsubTitleTextStyle({double? fontsize, FontWeight? fontWeight, Color? color}) {
   return TextStyle(
-    fontSize: fontsize ?? 14,
+    fontSize: fontsize ?? 16,
     fontWeight: fontWeight ?? FontWeight.normal,
-    color: color ?? Colors.black,
+    color: color ?? GetColor.blackcolor,
     fontFamily: AppFonts.poppins,
   );
 }
