@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:taskati/core/function/Navigator.dart';
 import 'package:taskati/core/services/local_storage.dart';
 import 'package:taskati/core/utils/color.dart';
 import 'package:taskati/core/utils/text_style.dart';
 import 'package:taskati/core/widget/button_custom.dart';
+import 'package:taskati/feature/home/page/home.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -22,9 +24,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: GetColor.whitecolor,
       appBar: AppBar(
-        leading: Icon(
-          Icons.arrow_back,
-          color: GetColor.primarycolor,
+        leading: IconButton(
+          onPressed: () {
+            pushto(context, HomeScreen());
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: GetColor.primarycolor,
+          ),
         ),
         actions: [
           Icon(

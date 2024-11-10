@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:taskati/core/model/model_task.dart';
 import 'package:taskati/core/utils/color.dart';
 import 'package:taskati/core/utils/text_style.dart';
 
 class taskitem extends StatelessWidget {
   const taskitem({
     super.key,
+    required this.modelTask,
   });
+  final ModelTask modelTask;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,13 @@ class taskitem extends StatelessWidget {
             borderRadius: BorderRadius.circular(
               10,
             ),
-            color: GetColor.primarycolor),
+            color: modelTask.color == 3
+                ? Colors.green
+                : modelTask.color == 0
+                    ? GetColor.primarycolor
+                    : modelTask.color == 1
+                        ? GetColor.orangecolor
+                        : GetColor.benkcolor),
         child: Row(
           children: [
             Expanded(
@@ -24,7 +33,7 @@ class taskitem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Flutter Task-1",
+                    modelTask.title,
                     style: gettextbutton(fontsize: 22),
                   ),
                   SizedBox(
@@ -40,7 +49,7 @@ class taskitem extends StatelessWidget {
                         width: 15,
                       ),
                       Text(
-                        "2:55AM - 2:40AM",
+                        "${modelTask.starttime} - ${modelTask.endtime}",
                         style: gettextbutton(fontsize: 12),
                       ),
                     ],
@@ -49,7 +58,7 @@ class taskitem extends StatelessWidget {
                     height: 7,
                   ),
                   Text(
-                    "I will do This Task",
+                    modelTask.note,
                     style: gettextbutton(),
                   ),
                 ],

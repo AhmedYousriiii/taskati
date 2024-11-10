@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:taskati/core/function/Navigator.dart';
+import 'package:taskati/core/model/model_task.dart';
+
+import 'package:taskati/core/services/local_storage.dart';
 import 'package:taskati/core/utils/color.dart';
 import 'package:taskati/core/utils/text_style.dart';
 import 'package:taskati/feature/home/page/home.dart';
@@ -16,7 +19,7 @@ class _AddTaskState extends State<AddTask> {
   int selectindex = 0;
   var titlecontroll = TextEditingController();
   var notecontroll = TextEditingController();
-  var datecontroll = TextEditingController(text: DateFormat("dd/mm/yyyy").format(DateTime.now()));
+  var datecontroll = TextEditingController(text: DateFormat("dd/MM/yyyy").format(DateTime.now()));
   var starttimecontroll = TextEditingController(text: DateFormat("hh: m a").format(DateTime.now()));
   var endtimecontroll = TextEditingController(text: DateFormat("hh:m a").format(DateTime.now()));
   var formkey = GlobalKey<FormState>();
@@ -260,6 +263,20 @@ class _AddTaskState extends State<AddTask> {
                         ),
                         onPressed: () {
                           if (formkey.currentState!.validate()) {
+                            String id = DateTime.now().toString() + titlecontroll.text;
+                            AppLocalStorage.cachetaskdata(
+                                id,
+                                ModelTask(
+                                  id: id,
+                                  title: titlecontroll.text,
+                                  date: datecontroll.text,
+                                  note: notecontroll.text,
+                                  starttime: starttimecontroll.text,
+                                  endtime: endtimecontroll.text,
+                                  iscompleted: false,
+                                  color: selectindex,
+                                ));
+                            // log(AppLocalStorage.getcachetaskdata(id)?.title ?? '');
                             pushReplace(context, HomeScreen());
                           }
                         },
