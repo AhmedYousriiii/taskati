@@ -19,12 +19,13 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     bool isUpload = AppLocalStorage.getcacheData(AppLocalStorage.isuploadkey) ?? false;
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 5), () {
       if (isUpload) {
         pushReplace(context, HomeScreen());
       } else {
         pushReplace(context, UploadScreen());
       }
+      pushReplace(context, UploadScreen());
     });
   }
 

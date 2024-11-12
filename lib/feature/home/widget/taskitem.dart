@@ -22,10 +22,10 @@ class taskitem extends StatelessWidget {
             color: modelTask.color == 3
                 ? Colors.green
                 : modelTask.color == 0
-                    ? GetColor.primarycolor
+                    ? GetColor.benkcolor
                     : modelTask.color == 1
                         ? GetColor.orangecolor
-                        : GetColor.benkcolor),
+                        : GetColor.primarycolor),
         child: Row(
           children: [
             Expanded(
@@ -48,9 +48,13 @@ class taskitem extends StatelessWidget {
                       SizedBox(
                         width: 15,
                       ),
-                      Text(
-                        "${modelTask.starttime} - ${modelTask.endtime}",
-                        style: gettextbutton(fontsize: 12),
+                      Expanded(
+                        child: Text(
+                          "${modelTask.starttime} - ${modelTask.endtime}",
+                          style: gettextbutton(fontsize: 12),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
@@ -60,6 +64,8 @@ class taskitem extends StatelessWidget {
                   Text(
                     modelTask.note,
                     style: gettextbutton(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

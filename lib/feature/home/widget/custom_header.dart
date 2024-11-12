@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -26,7 +25,7 @@ class customHeader extends StatelessWidget {
             ),
             Text(
               "Have A Nice Day.",
-              style: getsubTitleTextStyle(fontsize: 18),
+              style: getsubTitleTextStyle(fontsize: 16),
             ),
           ],
         ),
@@ -37,7 +36,6 @@ class customHeader extends StatelessWidget {
           },
           child: CircleAvatar(
             radius: 32,
-            backgroundColor: Colors.red,
             backgroundImage: imagePath != null ? FileImage(File(imagePath)) : null,
           ),
         ),

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:taskati/core/model/model_task.dart';
-
 import 'package:taskati/core/services/local_storage.dart';
 import 'package:taskati/core/utils/color.dart';
-
 import 'package:taskati/feature/auth/splash/splash.dart';
 
 void main() async {

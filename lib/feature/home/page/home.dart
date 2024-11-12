@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Text(
                               "No tasks ${selectdate}",
-                              style: getprimaryTextStyle(),
+                              style: getprimaryTextStyle(fontsize: 15),
                             ),
                           ],
                         );

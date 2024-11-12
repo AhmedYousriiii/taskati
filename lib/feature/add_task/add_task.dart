@@ -52,7 +52,7 @@ class _AddTaskState extends State<AddTask> {
               children: [
                 Text(
                   "Title",
-                  style: getTitleTextStyle(fontsize: 20),
+                  style: getsubTitleTextStyle(fontsize: 17),
                 ),
                 SizedBox(
                   height: 5,
@@ -74,7 +74,7 @@ class _AddTaskState extends State<AddTask> {
                 ),
                 Text(
                   "Note",
-                  style: getTitleTextStyle(fontsize: 20),
+                  style: getsubTitleTextStyle(fontsize: 17),
                 ),
                 SizedBox(
                   height: 5,
@@ -96,7 +96,7 @@ class _AddTaskState extends State<AddTask> {
                 ),
                 Text(
                   "Date",
-                  style: getTitleTextStyle(fontsize: 20),
+                  style: getsubTitleTextStyle(fontsize: 17),
                 ),
                 SizedBox(
                   height: 5,
@@ -138,7 +138,7 @@ class _AddTaskState extends State<AddTask> {
                         children: [
                           Text(
                             "Start Time",
-                            style: getTitleTextStyle(fontsize: 18),
+                            style: getsubTitleTextStyle(fontsize: 17),
                           ),
                           SizedBox(
                             height: 5,
@@ -177,7 +177,7 @@ class _AddTaskState extends State<AddTask> {
                         children: [
                           Text(
                             "End Time",
-                            style: getTitleTextStyle(fontsize: 18),
+                            style: getsubTitleTextStyle(fontsize: 17),
                           ),
                           SizedBox(
                             height: 5,
@@ -235,9 +235,9 @@ class _AddTaskState extends State<AddTask> {
                               padding: const EdgeInsets.all(2),
                               child: CircleAvatar(
                                 radius: 20,
-                                backgroundColor: index == 0
+                                backgroundColor: (index == 0)
                                     ? GetColor.benkcolor
-                                    : index == 1
+                                    : (index == 1)
                                         ? GetColor.orangecolor
                                         : GetColor.primarycolor,
                                 child: selectindex == index

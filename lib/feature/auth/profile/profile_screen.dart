@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:taskati/core/function/Navigator.dart';
@@ -18,7 +17,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   File? imagepath;
-  String name = "";
+  String name = "name";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             height: 20,
                           ),
                           ButtonCustom(
-                            text: "Upload from gen",
+                            text: "Upload from Gallery",
                             onpress: () {
                               pickiamge(
                                 iscamera: false,
@@ -124,7 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Text(
                   name,
-                  style: getprimaryTextStyle(),
+                  style: getprimaryTextStyle(fontsize: 16),
                 ),
                 Spacer(),
                 IconButton(
@@ -141,18 +140,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               TextFormField(
-                                keyboardType: TextInputType.name,
                                 onChanged: (value) {
                                   setState(() {
                                     name = value;
                                   });
                                 },
+                                keyboardType: TextInputType.name,
                               ),
                               SizedBox(
                                 height: 20,
                               ),
                               ButtonCustom(
-                                text: "Upload Your Name",
+                                text: " Upload Your Name",
                                 onpress: () {
                                   AppLocalStorage.cacheData(AppLocalStorage.namekey, name);
                                   Navigator.of(context).pop();

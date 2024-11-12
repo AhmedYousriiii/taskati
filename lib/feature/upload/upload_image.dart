@@ -31,21 +31,23 @@ class _UploadScreenState extends State<UploadScreen> {
           TextButton(
               onPressed: () async {
                 if (imageFile == null && name.isEmpty) {
-                  showErroDialog(context: context, massage: "upload your image and name");
+                  showErroDialog(context: context, massage: "please upload your image and name");
                 } else if (imageFile == null && name.isNotEmpty) {
-                  showErroDialog(context: context, massage: "upload your image");
+                  showErroDialog(context: context, massage: "please upload your image");
                 } else if (imageFile != null && name.isEmpty) {
-                  showErroDialog(context: context, massage: "chick your name");
+                  showErroDialog(context: context, massage: "please chick your name");
                 } else {
                   AppLocalStorage.cacheData(AppLocalStorage.namekey, name);
-                  AppLocalStorage.cacheData(AppLocalStorage.imagekey, imageFile);
+                  AppLocalStorage.cacheData(AppLocalStorage.imagekey, imageFile!.path);
                   AppLocalStorage.cacheData(AppLocalStorage.isuploadkey, true);
                   pushReplace(context, HomeScreen());
                 }
               },
               child: Text(
                 "Done",
-                style: getTitleTextStyle(color: GetColor.primarycolor),
+                style: getTitleTextStyle(
+                  color: GetColor.primarycolor,
+                ),
               ))
         ],
       ),
@@ -96,29 +98,6 @@ class _UploadScreenState extends State<UploadScreen> {
                 onChanged: (value) {
                   name = value;
                 },
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.circular(
-                        10,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: GetColor.primarycolor),
-                      borderRadius: BorderRadius.circular(
-                        10,
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
-                      borderRadius: BorderRadius.circular(
-                        10,
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                      10,
-                    ))),
               ),
             ],
           ),
